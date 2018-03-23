@@ -1,0 +1,12 @@
+//output:../../views/common/error.blade.php
+
+@if (count($errors) > 0)
+.alert.alert-danger
+  h4 有錯誤發生：
+  ul
+    @foreach ($errors->all() as $error)
+    li
+      i.glyphicon.glyphicon-remove
+      {{ $error }}
+    @endforeach
+@endif

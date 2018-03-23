@@ -1,0 +1,33 @@
+//output:../../views/users/edit.blade.php
+
+@extends('layouts.app')
+@section('content')
+.container
+  .panel.panel-default.col-md-10.col-md-offset-1
+    .panel-heading
+      h4
+        i.glyphicon.glyphicon-edit 編輯個人資訊
+    @include('common.error')
+    .panel-body
+      form(action!="{{ route('users.update', $user->id) }}", method='POST', accept-charset='UTF-8', enctype="multipart/form-data")
+        input(type='hidden', name='_method', value='PUT')
+        input(type='hidden', name='_token', value='{{ csrf_token() }}')
+        .form-group
+          label(for='name-field') 用戶名
+          input#name-field.form-control(type='text', name='name', value!="{{ old('name', $user->name ) }}")
+        .form-group
+          label(for='email-field') 信箱
+          input#email-field.form-control(type='text', name='email', value!="{{ old('email', $user->email ) }}")
+        .form-group
+          label(for='introduction-field') 個人簡介
+          textarea#introduction-field.form-control(name='introduction', rows='3') {{ old('introduction', $user->introduction ) }}
+        .form-group
+          label.avatar-label(for='') 用戶頭像
+          input(type='file', name='avatar')
+          @if($user->avatar)
+          br
+          img.thumbnail.img-responsive(src!='{{ $user->avatar }}', width='200')
+          @endif
+        .well.well-sm
+          button.btn.btn-primary(type='submit') 保存
+@endsection

@@ -1,0 +1,55 @@
+//output:../../views/auth/register.blade.php
+
+| @extends('layouts.app')
+| @section('content')
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading 用戶註冊
+        .panel-body
+          form.form-horizontal(method='POST', action="{{ route('register') }}")
+            | {{ csrf_field() }}
+            div(class!="form-group{{ $errors->has('name') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='name') 用戶名
+              .col-md-6
+                input#name.form-control(type='text', name='name', value="{{ old('name') }}", required='', autofocus='')
+                | @if ($errors->has('name'))
+                span.help-block
+                  strong {{ $errors->first('name') }}
+                | @endif
+            div(class!="form-group{{ $errors->has('email') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='email') E-Mail 地址
+              .col-md-6
+                input#email.form-control(type='email', name='email', value="{{ old('email') }}", required='')
+                | @if($errors->has('email'))
+                span.help-block
+                  strong {{ $errors->first('email') }}
+                | @endif
+            div(class!="form-group{{ $errors->has('password') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='password') 密碼
+              .col-md-6
+                input#password.form-control(type='password', name='password', required='')
+                | @if($errors->has('password'))
+                span.help-block
+                  strong {{ $errors->first('password') }}
+                | @endif
+            .form-group
+              label.col-md-4.control-label(for='password-confirm') 重复密码
+              .col-md-6
+                input#password-confirm.form-control(type='password', name='password_confirmation', required='')
+            .form-group(class!="{{ $errors->has('captcha') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='captcha') 驗證碼
+              .col-md-6
+                input#captcha.form-control(name='captcha')
+                img.thumbnail.captcha(src="{{ captcha_src('flat') }}", onclick="this.src='/captcha/flat?'+Math.random()", title='点击图片重新获取验证码')
+                | @if ($errors->has('captcha'))
+                span.help-block
+                  strong {{ $errors->first('captcha') }}
+                | @endif
+            .form-group
+              .col-md-6.col-md-offset-4
+                button.btn.btn-primary(type='submit')
+                  | 註冊
+                  i.glyphicon.glyphicon-arrow-right
+| @endsection
