@@ -1,0 +1,33 @@
+//output:../../views/topics/_topic_list.blade.php
+
+@if (count($topics))
+ul.media-list
+  @foreach ($topics as $topic)
+  li.media
+    .media-left
+      a(href!="{{ route('users.show', [$topic->user_id]) }}")
+        img.media-object.img-thumbnail(style='width: 52px; height: 52px;', src!='{{ $topic->user->avatar }}', title!='{{ $topic->user->name }}')
+    .media-body
+      .media-heading
+        a(href!="{{ route('topics.show', [$topic->id]) }}", title!='{{ $topic->title }}')
+          {{ $topic->title }}
+        a.pull-right(href!="{{ route('topics.show', [$topic->id]) }}")
+          span.badge  {{ $topic->reply_count }} 
+      .media-body.meta
+        a(href='#', title!='{{ $topic->category->name }}')
+          span.glyphicon.glyphicon-folder-open(aria-hidden='true')
+          {{ $topic->category->name }}
+        span  • 
+        a(href!="{{ route('users.show', [$topic->user_id]) }}", title!='{{ $topic->user->name }}')
+          span.glyphicon.glyphicon-user(aria-hidden='true')
+           {{ $topic->user->name }}
+        span  • 
+        span.glyphicon.glyphicon-time(aria-hidden='true')
+        span.timeago(title='最後活躍於') {{ $topic->updated_at->diffForHumans() }}
+  @if ( ! $loop->last)
+  hr
+  @endif
+  @endforeach
+@else
+.empty-block 戰無數據 ~_~ 
+@endif

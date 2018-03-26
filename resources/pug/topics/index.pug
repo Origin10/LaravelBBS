@@ -1,0 +1,22 @@
+//output:../../views/topics/index.blade.php
+
+@extends('layouts.app')
+@section('title', '話題列表')
+@section('content')
+.row
+  .col-lg-9.col-md-9.topic-list
+    .panel.panel-default
+      .panel-heading
+        ul.nav.nav-pills
+          li.active(role='presentation')
+            a(href='#') 最後發布
+          li(role='presentation')
+            a(href='#') 最新發佈
+      .panel-body
+        {{-- 話題列表 --}}
+        @include('topics._topic_list', ['topics' => $topics])
+        {{-- 分頁 --}}
+        {!! $topics->render() !!}
+  .col-lg-3.col-md-3.sidebar
+    @include('topics._sidebar')
+@endsection

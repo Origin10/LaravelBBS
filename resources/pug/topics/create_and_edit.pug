@@ -1,0 +1,63 @@
+//output:../../views/topics/create_and_edit.blade.php
+
+| @extends('layouts.app')
+| @section('content')
+.container
+  .col-md-10.col-md-offset-1
+    .panel.panel-default
+      .panel-heading
+        h1
+          i.glyphicon.glyphicon-edit
+          | Topic /
+          | @if($topic->id)
+          | Edit #
+          | {{$topic->id}}
+          //- Edit #{{$topic->id}}
+          | @else
+          | Create
+          | @endif
+      | @include('common.error')
+      .panel-body
+        | @if($topic->id)
+        form(action!="{{ route('topics.update', $topic->id) }}", method='POST', accept-charset='UTF-8')
+          input(type='hidden', name='_method', value='PUT')
+          | @else
+          form(action="{{ route('topics.store') }}", method='POST', accept-charset='UTF-8')
+            | @endif
+            input(type='hidden', name='_token', value='{{ csrf_token() }}')
+            .form-group
+              label(for='title-field') Title
+              input#title-field.form-control(type='text', name='title', value="{{ old('title', $topic->title ) }}")
+            .form-group
+              label(for='body-field') Body
+              textarea#body-field.form-control(name='body', rows='3') {{ old('body', $topic->body ) }}
+            .form-group
+              label(for='user_id-field') User_id
+              input#user_id-field.form-control(type='text', name='user_id', value!="{{ old('user_id', $topic->user_id ) }}")
+            .form-group
+              label(for='category_id-field') Category_id
+              input#category_id-field.form-control(type='text', name='category_id', value!="{{ old('category_id', $topic->category_id ) }}")
+            .form-group
+              label(for='reply_count-field') Reply_count
+              input#reply_count-field.form-control(type='text', name='reply_count', value="{{ old('reply_count', $topic->reply_count ) }}")
+            .form-group
+              label(for='view_count-field') View_count
+              input#view_count-field.form-control(type='text', name='view_count', value="{{ old('view_count', $topic->view_count ) }}")
+            .form-group
+              label(for='last_reply_user_id-field') Last_reply_user_id
+              input#last_reply_user_id-field.form-control(type='text', name='last_reply_user_id', value="{{ old('last_reply_user_id', $topic->last_reply_user_id ) }}")
+            .form-group
+              label(for='order-field') Order
+              input#order-field.form-control(type='text', name='order', value!="{{ old('order', $topic->order ) }}")
+            .form-group
+              label(for='excerpt-field') Excerpt
+              textarea#excerpt-field.form-control(name='excerpt', rows='3') {{ old('excerpt', $topic->excerpt ) }}
+            .form-group
+              label(for='slug-field') Slug
+              input#slug-field.form-control(type='text', name='slug', value!="{{ old('slug', $topic->slug ) }}")
+            .well.well-sm
+              button.btn.btn-primary(type='submit') Save
+              a.btn.btn-link.pull-right(href="{{ route('topics.index') }}")
+                i.glyphicon.glyphicon-backward
+                | Back
+| @endsection
