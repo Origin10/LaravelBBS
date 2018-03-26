@@ -1,10 +1,14 @@
 //output:../../views/topics/index.blade.php
 
 @extends('layouts.app')
-@section('title', '話題列表')
+@section('title', isset($category) ? $category->name : '話題列表')
 @section('content')
 .row
   .col-lg-9.col-md-9.topic-list
+    @if (isset($category))
+    .alert.alert-info(role='alert')
+      | {{ $category->name }} ：{{ $category->description }}
+    @endif
     .panel.panel-default
       .panel-heading
         ul.nav.nav-pills
@@ -17,6 +21,6 @@
         @include('topics._topic_list', ['topics' => $topics])
         {{-- 分頁 --}}
         {!! $topics->render() !!}
-  .col-lg-3.col-md-3.sidebar
+  .col-lg-3.col-md-3.sidebar(style="background-color: #fff;box-shadow: 0 1px 11px 2px rgba(42, 42, 42, 0.1);margin-bottom: 40px;margin-top: 0;")
     @include('topics._sidebar')
 @endsection

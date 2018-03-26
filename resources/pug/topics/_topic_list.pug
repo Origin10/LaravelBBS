@@ -14,9 +14,10 @@ ul.media-list
         a.pull-right(href!="{{ route('topics.show', [$topic->id]) }}")
           span.badge  {{ $topic->reply_count }} 
       .media-body.meta
-        a(href='#', title!='{{ $topic->category->name }}')
+        a(href!="{{ route('categories.show', $topic->category->id) }}", title!='{{ $topic->category->name }}')
           span.glyphicon.glyphicon-folder-open(aria-hidden='true')
-          {{ $topic->category->name }}
+          | {{ $topic->category->name }}
+
         span  • 
         a(href!="{{ route('users.show', [$topic->user_id]) }}", title!='{{ $topic->user->name }}')
           span.glyphicon.glyphicon-user(aria-hidden='true')
