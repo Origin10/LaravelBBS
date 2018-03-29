@@ -179,6 +179,12 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        dominykasgel\GoogleSafeBrowsing\GoogleSafeBrowsingServiceProvider::class,
+
+
+
+
+
     ],
 
     /*
@@ -228,6 +234,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'GoogleSafeBrowsing' => dominykasgel\GoogleSafeBrowsing\Facades\GoogleSafeBrowsingFacade::class,
 
     ],
 

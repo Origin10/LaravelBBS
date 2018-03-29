@@ -4,7 +4,7 @@
 @section('content')
 <div class="row">
   <div class="col-lg-9 col-md-9 topic-list">@if (isset($category))
-    <div role="alert" class="alert alert-info">{{ $category->name }} ：{{ $category->description }}</div>@endif
+    <div role="alert" class="alert alert-info">{{ $category->name }}：{{ $category->description }}</div>@endif
     <div class="panel panel-default">
       <div class="panel-heading">
         <ul class="nav nav-pills">
