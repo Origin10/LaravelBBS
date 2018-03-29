@@ -12,10 +12,10 @@
     .panel.panel-default
       .panel-heading
         ul.nav.nav-pills
-          li.active(role='presentation')
-            a(href='#') 最後發布
-          li(role='presentation')
-            a(href='#') 最新發佈
+          li(class="{{ active_class( ! if_query('order', 'recent') ) }}")
+            a(href='{{ Request::url() }}?order=default') 最後回覆
+          li(class="{{ active_class(if_query('order', 'recent')) }}")
+            a(href='{{ Request::url() }}?order=recent') 最新發佈
       .panel-body
         {{-- 話題列表 --}}
         @include('topics._topic_list', ['topics' => $topics])
