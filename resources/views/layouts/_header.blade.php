@@ -21,15 +21,18 @@
         <!-- Authentication Links-->@guest
         <li><a href="{{ route('login') }}">登入</a></li>
         <li><a href="{{ route('register') }}">註冊</a></li>@else
-        <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span style="margin-right:8px; margin-top:-5px;" class="user-avatar pull-left"><img src="{{ Auth::user()->avatar }}" width="30px" height="30px" class="img-responsive img-circle"/></span>{{ Auth::user()->name }} <span class="caret"></span></a>
-          <ul role="menu" class="dropdown-menu">
-            <li><a href="{{ route('users.edit', Auth::id()) }}">編輯資料</a></li>
-            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();              document.getElementById('logout-form').submit();">登出</a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-            </li>
-          </ul>
-        </li>@endguest
+        <div class="dropdown show"><a id="dropdownMenuLink" href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="btn btn-secondary dropdown-toggle"><span style="margin-right:8px; margin-top:-5px;" class="user-avatar pull-left"><img src="{{ Auth::user()->avatar }}" width="30px" height="30px" class="img-responsive img-circle"/></span>{{ Auth::user()->name }} <span class="caret"></span>
+            <ul role="menu" class="dropdown-menu">
+              <li><a href="{{ route('users.show', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-user">&nbsp;個人中心</span></a></li>
+              <li><a href="{{ route('users.edit', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-edit">&nbsp;編輯資料</span></a></li>
+              <li><a href="{{ route('logout') }}" onclick="event.preventDefault();                document.getElementById('logout-form').submit();"><span aria-hidden="true" class="glyphicon glyphicon-log-out">&nbsp;退出登入</span></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+              </li>
+            </ul>@endguest</a></div>
       </ul>
     </div>
   </div>
 </nav>
+<script src="{{ URL::asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ URL::asset('js/popper.min.js') }}">*/</script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

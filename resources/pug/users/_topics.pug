@@ -1,0 +1,18 @@
+//output:../../views/users/_topics.blade.php
+
+@if (count($topics))
+ul.list-group
+  @foreach ($topics as $topic)
+  li.list-group-item
+    a(href!="{{ route('topics.show', $topic->id) }}")
+      {{ $topic->title }}
+    span.meta.pull-right
+      {{ $topic->reply_count }} 回覆
+      span  ⋅ 
+      {{ $topic->created_at->diffForHumans() }}
+   @endforeach
+@else
+.empty-block 暫無數據 
+@endif
+{{-- 分頁 --}}
+{!! $topics->render() !!}

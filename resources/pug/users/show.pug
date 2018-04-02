@@ -30,5 +30,10 @@
     {{-- 用戶發布的內容 --}}
     .panel.panel-default
       .panel-body
-        暫無數據 ~_~
+        ul.nav.nav-tabs
+          li.active
+            a(href='#') Ta 的話題
+          li
+            a(href='#') Ta 的回覆
+        @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
 @stop

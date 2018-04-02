@@ -27,7 +27,12 @@
     </div>
     <hr/>{{-- 用戶發布的內容 --}}
     <div class="panel panel-default">
-      <div class="panel-body">暫無數據 ~_~</div>
+      <div class="panel-body">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#">Ta 的話題</a></li>
+          <li><a href="#">Ta 的回覆</a></li>
+        </ul>@include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
+      </div>
     </div>
   </div>
 </div>@stop
