@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'LaraBBS') - Laravel 進階教學</title>
     <!-- Styles-->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">@yield('styles')
   </head>
   <body>
     <div id="app" class="{{ route_class() }}-page">@include('layouts._header')
@@ -18,9 +18,6 @@
       </div>@include('layouts._footer')
     </div>
     <!-- Scripts-->
-    <script src="{{ asset('js/app.js') }}"></script>@if ( Config::get('app.debug') )
-    <script type="text/javascript">document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\\/script>')</script>@endif
-    @if ( Config::get('app.debug') )
-    <script type="text/javascript">document.write('<script src="//localhost:35729/livereload.js?snipver=1" type="text/javascript"><\\/script>')</script>@endif
+    <script src="{{ asset('js/app.js') }}"></script>@yield('scripts')
   </body>
 </html>

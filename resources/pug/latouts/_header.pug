@@ -41,13 +41,13 @@ nav.navbar.navbar-default.navbar-static-top
         li
           a(href="{{ route('topics.create') }}")
             span.glyphicon.glyphicon-plus(aria-hidden='true')
-        div.dropdown
+        li.dropdown
           a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
             span.user-avatar.pull-left
               img.img-responsive.img-circle(src!="{{ Auth::user()->avatar }}", width='30px', height='30px')
-              {{ Auth::user()->name }} 
-              span.caret
-            ul.dropdown-menu(role='menu')
+             &nbsp; {{ Auth::user()->name }} 
+            span.caret
+          ul.dropdown-menu(role='menu')
               li
                 a(href="{{ route('users.show', Auth::id()) }}") 
                   span.glyphicon.glyphicon-user(aria-hidden='true') &nbsp;個人中心
@@ -60,7 +60,3 @@ nav.navbar.navbar-default.navbar-static-top
                   span.glyphicon.glyphicon-log-out(aria-hidden='true') &nbsp;退出登入
                 form#logout-form(action="{{ route('logout') }}", method='POST', style='display: none;') {{ csrf_field() }}
             @endguest
-            
-script(src="{{ URL::asset('js/jquery-3.3.1.slim.min.js') }}")
-script(src="{{ URL::asset('js/popper.min.js') }}") */
-script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
