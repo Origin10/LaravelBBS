@@ -1,53 +1,38 @@
 //output:../../views/topics/show.blade.php
 
 | @extends('layouts.app')
+| @section('title', $topic->title)
+| @section('description', $topic->excerpt)
 | @section('content')
-.container
-  .col-md-10.col-md-offset-1
+.row
+  .col-lg-3.col-md-3.hidden-sm.hidden-xs.author-info
     .panel.panel-default
-      .panel-heading
-        h1 Topic / Show #
-          {{ $topic->id }}
-        //- Topic / Show #{{ $topic->id }}
       .panel-body
-        .well.well-sm
-          .row
-            .col-md-6
-              a.btn.btn-link(href="{{ route('topics.index') }}")
-                i.glyphicon.glyphicon-backward
-                |  Back
-            .col-md-6
-              a.btn.btn-sm.btn-warning.pull-right(href!="{{ route('topics.edit', $topic->id) }}")
-                i.glyphicon.glyphicon-edit
-                |  Edit
-        label Title
-        p
+        .text-center
+          | 作者：{{ $topic->user->name }}
+        hr
+        .media
+          div(align='center')
+            a(href!="{{ route('users.show', $topic->user->id) }}")
+              img.thumbnail.img-responsive(src!='{{ $topic->user->avatar }}', width='300px', height='300px')
+  .col-lg-9.col-md-9.col-sm-12.col-xs-12.topic-content
+    .panel.panel-default
+      .panel-body
+        h1.text-center
           | {{ $topic->title }}
-        label Body
-        p
-          | {{ $topic->body }}
-        label User_id
-        p
-          | {{ $topic->user_id }}
-        label Category_id
-        p
-          | {{ $topic->category_id }}
-        label Reply_count
-        p
+        .article-meta.text-center
+          | {{ $topic->created_at->diffForHumans() }}
+          | ⋅
+          span.glyphicon.glyphicon-comment(aria-hidden='true')
           | {{ $topic->reply_count }}
-        label View_count
-        p
-          | {{ $topic->view_count }}
-        label Last_reply_user_id
-        p
-          | {{ $topic->last_reply_user_id }}
-        label Order
-        p
-          | {{ $topic->order }}
-        label Excerpt
-        p
-          | {{ $topic->excerpt }}
-        label Slug
-        p
-          | {{ $topic->slug }}
-| @endsection
+        .topic-body
+          | {!! $topic->body !!}
+        .operate
+          hr
+          a.btn.btn-default.btn-xs(href!="{{ route('topics.edit', $topic->id) }}", role='button')
+            i.glyphicon.glyphicon-edit
+            | 編輯
+          a.btn.btn-default.btn-xs(href='#', role='button')
+            i.glyphicon.glyphicon-trash
+            | 刪除
+| @stop
