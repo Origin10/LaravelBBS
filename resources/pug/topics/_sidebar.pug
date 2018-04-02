@@ -1,3 +1,7 @@
 //output:../../views/topics/_sidebar.blade.php
 
-右邊導航欄
+.panel.panel-default
+  .panel-body
+    a.btn.btn-success.btn-block(href="{{ route('topics.create') }}", aria-label='Left Align')
+      span.glyphicon.glyphicon-pencil(aria-hidden='true')
+      | 新建帖子

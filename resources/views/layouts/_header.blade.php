@@ -21,7 +21,8 @@
         <!-- Authentication Links-->@guest
         <li><a href="{{ route('login') }}">登入</a></li>
         <li><a href="{{ route('register') }}">註冊</a></li>@else
-        <div class="dropdown show"><a id="dropdownMenuLink" href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="btn btn-secondary dropdown-toggle"><span style="margin-right:8px; margin-top:-5px;" class="user-avatar pull-left"><img src="{{ Auth::user()->avatar }}" width="30px" height="30px" class="img-responsive img-circle"/></span>{{ Auth::user()->name }} <span class="caret"></span>
+        <li><a href="{{ route('topics.create') }}"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></a></li>
+        <div class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="user-avatar pull-left"><img src="{{ Auth::user()->avatar }}" width="30px" height="30px" class="img-responsive img-circle"/>{{ Auth::user()->name }} <span class="caret"></span></span>
             <ul role="menu" class="dropdown-menu">
               <li><a href="{{ route('users.show', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-user">&nbsp;個人中心</span></a></li>
               <li><a href="{{ route('users.edit', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-edit">&nbsp;編輯資料</span></a></li>

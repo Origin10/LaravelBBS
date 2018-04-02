@@ -38,12 +38,15 @@ nav.navbar.navbar-default.navbar-static-top
         li
           a(href="{{ route('register') }}") 註冊
         @else
-        div.dropdown.show
-          a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
-            span.user-avatar.pull-left(style='margin-right:8px; margin-top:-5px;')
+        li
+          a(href="{{ route('topics.create') }}")
+            span.glyphicon.glyphicon-plus(aria-hidden='true')
+        div.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+            span.user-avatar.pull-left
               img.img-responsive.img-circle(src!="{{ Auth::user()->avatar }}", width='30px', height='30px')
-            {{ Auth::user()->name }} 
-            span.caret
+              {{ Auth::user()->name }} 
+              span.caret
             ul.dropdown-menu(role='menu')
               li
                 a(href="{{ route('users.show', Auth::id()) }}") 
