@@ -23,8 +23,10 @@
           </div>
           <div class="form-group">
             <select name="category_id" required="" class="form-control">
-              <option value="" hidden="" disabled="" selected="">請選擇分類</option>@foreach ($categories as $value)
-              <option value="{{ $value->id }}">{{ $value->name }}</option>@endforeach
+              <option value="" hidden disabled {{ $topic->id ? '' : 'selected' }}>請選擇分類</option>
+              @foreach ($categories as $value)
+              <option value="{{ $value->id }}" {{ $topic->category_id == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">

@@ -26,10 +26,11 @@
             input.form-control(type='text', name='title', value!="{{ old('title', $topic->title ) }}", placeholder='請填寫標題', required='')
           .form-group
             select.form-control(name='category_id', required='')
-              option(value='', hidden='', disabled='', selected='') 請選擇分類
+              | <option value="" hidden disabled {{ $topic->id ? '' : 'selected' }}>請選擇分類</option>
               | @foreach ($categories as $value)
-              option(value!='{{ $value->id }}') {{ $value->name }}
+              | <option value="{{ $value->id }}" {{ $topic->category_id == $value->id ? 'selected' : '' }}>{{ $value->name }}</option>
               | @endforeach
+
           .form-group
             textarea#editor.form-control(name='body', rows='3', placeholder='請填入至少三字符的內容。', required='') {{ old('body', $topic->body ) }}
           .well.well-sm
