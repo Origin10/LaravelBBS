@@ -27,12 +27,15 @@
           | {{ $topic->reply_count }}
         .topic-body
           | {!! $topic->body !!}
+        @can('update', $topic)
         .operate
           hr
           a.btn.btn-default.btn-xs(href!="{{ route('topics.edit', $topic->id) }}", role='button')
-            i.glyphicon.glyphicon-edit
-            | 編輯
-          a.btn.btn-default.btn-xs(href='#', role='button')
-            i.glyphicon.glyphicon-trash
-            | 刪除
-| @stop
+            i.glyphicon.glyphicon-edit 編輯
+          form(action!="{{ route('topics.destroy', $topic->id) }}", method='post')
+            | {{ csrf_field() }}
+            | {{ method_field('DELETE') }}
+            button.btn.btn-default.btn-xs.pull-left(type='submit')
+              i.glyphicon.glyphicon-trash 刪除
+        @endcan
+@stop

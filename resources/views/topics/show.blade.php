@@ -23,10 +23,15 @@
           {{ $topic->created_at->diffForHumans() }}
           ⋅<span aria-hidden="true" class="glyphicon glyphicon-comment"></span>{{ $topic->reply_count }}
         </div>
-        <div class="topic-body">{!! $topic->body !!}</div>
+        <div class="topic-body">{!! $topic->body !!}</div>@can('update', $topic)
         <div class="operate">
-          <hr/><a href="{{ route('topics.edit', $topic->id) }}" role="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i>編輯</a><a href="#" role="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-trash"></i>刪除</a>
-        </div>
+          <hr/><a href="{{ route('topics.edit', $topic->id) }}" role="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit">編輯</i></a>
+          <form action="{{ route('topics.destroy', $topic->id) }}" method="post">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <button type="submit" class="btn btn-default btn-xs pull-left"><i class="glyphicon glyphicon-trash">刪除</i></button>
+          </form>
+        </div>@endcan
       </div>
     </div>
   </div>
