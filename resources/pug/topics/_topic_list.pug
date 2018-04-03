@@ -9,7 +9,7 @@ ul.media-list
         img.media-object.img-thumbnail(style='width: 52px; height: 52px;', src!='{{ $topic->user->avatar }}', title!='{{ $topic->user->name }}')
     .media-body
       .media-heading
-        a(href!="{{ route('topics.show', [$topic->id]) }}", title!='{{ $topic->title }}')
+        a(href!="{{ $topic->link() }}", title!="{{ $topic->title }}")
           {{ $topic->title }}
         a.pull-right(href!="{{ route('topics.show', [$topic->id]) }}")
           span.badge  {{ $topic->reply_count }} 
