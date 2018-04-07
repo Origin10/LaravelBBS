@@ -21,7 +21,8 @@
         <!-- Authentication Links-->@guest
         <li><a href="{{ route('login') }}">登入</a></li>
         <li><a href="{{ route('register') }}">註冊</a></li>@else
-        <li><a href="{{ route('topics.create') }}"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></a></li>
+        <li><a href="{{ route('topics.create') }}"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></a></li>{{-- 消息通知标记 --}}
+        <li><a href="{{ route('notifications.index') }}" style="margin-top: -2px;" class="notifications-badge"><span title="消息提醒" class="badge badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'fade' }}">{{ Auth::user()->notification_count }}</span></a></li>
         <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="user-avatar pull-left"><img src="{{ Auth::user()->avatar }}" width="30px" height="30px" class="img-responsive img-circle"/></span>&nbsp; {{ Auth::user()->name }} <span class="caret"></span></a>
           <ul role="menu" class="dropdown-menu">
             <li><a href="{{ route('users.show', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-user">&nbsp;個人中心</span></a></li>

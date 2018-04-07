@@ -1,0 +1,25 @@
+//output:../../views/notifications/index.blade.php
+
+| @extends('layouts.app')
+| @section('title')
+| 我的通知
+| @stop
+| @section('content')
+.container
+  .col-md-10.col-md-offset-1
+    .panel.panel-default
+      .panel-body
+        h3.text-center
+          span.glyphicon.glyphicon-bell(aria-hidden='true')
+          | 我的通知
+        hr
+        | @if ($notifications->count())
+        .notification-list
+          | @foreach ($notifications as $notification)
+          | @include('notifications.types._' . snake_case(class_basename($notification->type)))
+          | @endforeach
+          | {!! $notifications->render() !!}
+        | @else
+        .empty-block 沒有通知消息！
+        | @endif
+| @stop
