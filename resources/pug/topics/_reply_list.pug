@@ -1,0 +1,22 @@
+//output:../../views/topics/_reply_list.blade.php
+
+.reply-list
+  | @foreach ($replies as $index => $reply)
+  .media(name!='reply{{ $reply->id }}', id!='reply{{ $reply->id }}')
+    .avatar.pull-left
+      a(href!="{{ route('users.show', [$reply->user_id]) }}")
+        img.media-object.img-thumbnail(alt!='{{ $reply->user->name }}', src!='{{ $reply->user->avatar }}', style='width:48px;height:48px;')
+    .infos
+      .media-heading
+        a(href!="{{ route('users.show', [$reply->user_id]) }}", title!='{{ $reply->user->name }}')
+          | {{ $reply->user->name }}
+        span  •  
+        span.meta(title!='{{ $reply->created_at }}') {{ $reply->created_at->diffForHumans() }}
+        | {{-- 回復刪除按鈕 --}}
+        span.meta.pull-right
+          a(title='删除回复')
+            span.glyphicon.glyphicon-trash(aria-hidden='true')
+      .reply-content
+        | {!! $reply->content !!}
+  hr
+  | @endforeach

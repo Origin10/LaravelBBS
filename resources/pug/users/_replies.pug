@@ -1,0 +1,19 @@
+//output:../../views/users/_replies.blade.php
+
+| @if (count($replies))
+ul.list-group
+  | @foreach ($replies as $reply)
+  li.list-group-item
+    a(href="{{ $reply->topic->link(['#reply' . $reply->id]) }}")
+      | {{ $reply->topic->title }}
+    .reply-content(style='margin: 6px 0;')
+      | {!! $reply->content !!}
+    .meta
+      span.glyphicon.glyphicon-time(aria-hidden='true')
+      |  回復於 {{ $reply->created_at->diffForHumans() }}
+  | @endforeach
+| @else
+.empty-block 暫無數據 ~_~ 
+| @endif
+| {{-- 分頁 --}}
+| {!! $replies->appends(Request::except('page'))->render() !!}
