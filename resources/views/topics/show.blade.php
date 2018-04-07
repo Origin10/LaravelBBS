@@ -25,31 +25,19 @@
         </div>
         <div class="topic-body">{!! $topic->body !!}</div>@can('update', $topic)
         <div class="operate">
-          <hr/><a href="{{ route('topics.edit', $topic->id) }}" role="button" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit">編輯</i></a>
-          <form action="{{ route('topics.destroy', $topic->id) }}" method="post">
+          <hr/><a href="{{ route('topics.edit', $topic->id) }}" role="button" class="btn btn-default btn-xs pull-left"><i class="glyphicon glyphicon-edit"></i> 編輯</a>
+          <form action="{{ route('topics.destroy', $topic->id) }}" method="post" style="display: inherit">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
-            <button type="submit" class="btn btn-default btn-xs pull-left"><i class="glyphicon glyphicon-trash">刪除</i></button>
+            <button type="submit" style="margin-left: 6px" class="btn btn-default btn-xs pull-left"><i class="glyphicon glyphicon-trash"></i>刪除</button>
           </form>
         </div>@endcan
       </div>
-    </div>{{-- 用戶回覆列表 --}}
+    </div>{{-- 用户回复列表 --}}
     <div class="panel panel-default topic-reply">
       <div class="panel-body">
-        @include('topics._reply_box', ['topic' => $topic])
+        @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
         @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
-      </div>
-    </div>{{-- 用戶發布的內容 --}}
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <ul class="nav nav-tabs">
-          <li class="{{ active_class(if_query('tab', null)) }}"><a href="{{ route('users.show', $user->id) }}">Ta 的話題</a></li>
-          <li class="{{ active_class(if_query('tab', 'replies')) }}"><a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}">Ta 的回覆</a></li>
-        </ul>@if (if_query('tab', 'replies'))
-        @include('users._replies', ['replies' => $user->replies()->with('topic')->recent()->paginate(5)])
-        @else
-        @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
-        @endif
       </div>
     </div>
   </div>

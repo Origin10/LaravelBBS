@@ -61,5 +61,5 @@
             pasteImage: true,
             });
   });
-  
+
 </script>@stop

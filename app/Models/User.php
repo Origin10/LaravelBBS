@@ -15,7 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'introduction'
+        'name',
+        'email',
+        'password',
+        'introduction',
+        'avatar',
     ];
 
     /**
@@ -24,22 +28,22 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
-
 
     public function topics()
     {
         return $this->hasMany(Topic::class);
     }
 
-    public function isAuthorOf($model)
-    {
-        return $this->id == $model->user_id;
-    }
-
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function isAuthOf($model)
+    {
+        return $this->id === $model->user_id;
     }
 }

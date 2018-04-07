@@ -1,0 +1,13 @@
+//output:../../views/topics/_reply_box.blade.php
+
+| @include('common.error')
+.reply-box
+  form(action="{{ route('replies.store') }}", method='POST', accept-charset='UTF-8')
+    input(type='hidden', name='_token', value='{{ csrf_token() }}')
+    input(type='hidden', name='topic_id', value!='{{ $topic->id }}')
+    .form-group
+      textarea.form-control(rows='3', placeholder='分享你的想法', name='content')
+    button.btn.btn-primary.btn-sm(type='submit')
+      i.fa.fa-share
+      | 回覆
+hr
