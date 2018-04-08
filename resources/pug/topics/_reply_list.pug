@@ -13,9 +13,14 @@
         span  •  
         span.meta(title!='{{ $reply->created_at }}') {{ $reply->created_at->diffForHumans() }}
         | {{-- 回復刪除按鈕 --}}
+        | @can('destroy', $reply)
         span.meta.pull-right
-          a(title='删除回复')
-            span.glyphicon.glyphicon-trash(aria-hidden='true')
+          form(action!="{{ route('replies.destroy', $reply->id) }}", method='post')
+            | {{ csrf_field() }}
+            | {{ method_field('DELETE') }}
+            button.btn.btn-default.btn-xs.pull-left(type='submit')
+              i.glyphicon.glyphicon-trash
+        | @endcan
       .reply-content
         | {!! $reply->content !!}
   hr
