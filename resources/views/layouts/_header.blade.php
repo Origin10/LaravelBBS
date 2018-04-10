@@ -24,10 +24,11 @@
         <li><a href="{{ route('topics.create') }}"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></a></li>{{-- 消息通知标记 --}}
         <li><a href="{{ route('notifications.index') }}" style="margin-top: -2px;" class="notifications-badge"><span title="消息提醒" class="badge badge-{{ Auth::user()->notification_count > 0 ? 'hint' : 'fade' }}">{{ Auth::user()->notification_count }}</span></a></li>
         <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="user-avatar pull-left"><img src="{{ Auth::user()->avatar }}" width="30px" height="30px" class="img-responsive img-circle"/></span>&nbsp; {{ Auth::user()->name }} <span class="caret"></span></a>
-          <ul role="menu" class="dropdown-menu">
+          <ul role="menu" class="dropdown-menu">@can('manage_contents')
+            <li><a href="{{ url(config('administrator.uri')) }}"><span aria-hidden="true" class="glyphicon glyphicon-dashboard">&nbsp;管理後台</span></a></li>@endcan
             <li><a href="{{ route('users.show', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-user">&nbsp;個人中心</span></a></li>
             <li><a href="{{ route('users.edit', Auth::id()) }}"> <span aria-hidden="true" class="glyphicon glyphicon-edit">&nbsp;編輯資料</span></a></li>
-            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();                document.getElementById('logout-form').submit();"><span aria-hidden="true" class="glyphicon glyphicon-log-out">&nbsp;退出登入</span></a>
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();              document.getElementById('logout-form').submit();"><span aria-hidden="true" class="glyphicon glyphicon-log-out">&nbsp;退出登入</span></a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
             </li>
           </ul>@endguest

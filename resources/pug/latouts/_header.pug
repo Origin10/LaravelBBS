@@ -50,18 +50,23 @@ nav.navbar.navbar-default.navbar-static-top
           a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
             span.user-avatar.pull-left
               img.img-responsive.img-circle(src!="{{ Auth::user()->avatar }}", width='30px', height='30px')
-             &nbsp; {{ Auth::user()->name }} 
+             | &nbsp; {{ Auth::user()->name }} 
             span.caret
           ul.dropdown-menu(role='menu')
-              li
-                a(href="{{ route('users.show', Auth::id()) }}") 
-                  span.glyphicon.glyphicon-user(aria-hidden='true') &nbsp;個人中心
-              li
-                a(href="{{ route('users.edit', Auth::id()) }}") 
-                  span.glyphicon.glyphicon-edit(aria-hidden='true') &nbsp;編輯資料
-              li
-                a(href="{{ route('logout') }}", onclick="event.preventDefault();\
-                document.getElementById('logout-form').submit();")
-                  span.glyphicon.glyphicon-log-out(aria-hidden='true') &nbsp;退出登入
-                form#logout-form(action="{{ route('logout') }}", method='POST', style='display: none;') {{ csrf_field() }}
-            @endguest
+            | @can('manage_contents')
+            li
+              a(href="{{ url(config('administrator.uri')) }}")
+                span.glyphicon.glyphicon-dashboard(aria-hidden='true') &nbsp;管理後台
+            | @endcan
+            li
+              a(href="{{ route('users.show', Auth::id()) }}") 
+                span.glyphicon.glyphicon-user(aria-hidden='true') &nbsp;個人中心
+            li
+              a(href="{{ route('users.edit', Auth::id()) }}") 
+                span.glyphicon.glyphicon-edit(aria-hidden='true') &nbsp;編輯資料
+            li
+              a(href="{{ route('logout') }}", onclick="event.preventDefault();\
+              document.getElementById('logout-form').submit();")
+                span.glyphicon.glyphicon-log-out(aria-hidden='true') &nbsp;退出登入
+              form#logout-form(action="{{ route('logout') }}", method='POST', style='display: none;') {{ csrf_field() }}
+          @endguest
