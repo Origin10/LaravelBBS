@@ -181,9 +181,7 @@ return [
 
         dominykasgel\GoogleSafeBrowsing\GoogleSafeBrowsingServiceProvider::class,
 
-
-
-
+        Frozennode\Administrator\AdministratorServiceProvider::class,
 
     ],
 

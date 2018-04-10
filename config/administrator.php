@@ -38,7 +38,7 @@ return array(
      */
     'menu' => [
         '用戶與權限' => [
-            'users',
+            'users' // 对应需要创建的文件：`config/administrator/posts.php`
         ],
     ],
 
@@ -51,6 +51,7 @@ return array(
     'permission' => function () {
         // 只要是能管理内容的用户，就允许访问后台
         return Auth::check() && Auth::user()->can('manage_contents');
+        // return true;
     },
 
     /*
