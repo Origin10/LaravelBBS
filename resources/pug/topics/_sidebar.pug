@@ -4,4 +4,17 @@
   .panel-body
     a.btn.btn-success.btn-block(href="{{ route('topics.create') }}", aria-label='Left Align')
       span.glyphicon.glyphicon-pencil(aria-hidden='true')
-      | 新建帖子
+      |  新建帖子
+| @if (count($active_users))
+.panel.panel-default
+  .panel-body.active-users
+    .text-center 活躍用戶
+    hr
+    | @foreach ($active_users as $active_user)
+    a.media(href!="{{ route('users.show', $active_user->id) }}")
+      .media-left.media-middle
+        img.img-circle.media-object(src!='{{ $active_user->avatar }}', width='24px', height='24px')
+      .media-body
+        span.media-heading {{ $active_user->name }}
+    | @endforeach
+| @endif
