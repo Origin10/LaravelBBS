@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'LaraBBS') - Laravel 進階教學</title>
-    <meta name="description" content="@yield('description', 'LaraBBS 愛好者社區')">
+    <meta name="description" content="@yield('description', setting('seo_description', 'LaraBBS 愛好者社區'))">
+    <meta name="keyword" content="@yield('keyword', setting('seo_keyword', 'LaraBBS,社區,論壇,開發者論壇'))">
+    <title>@yield('title', config('app.name')) - {{ setting('site_name', 'Laravel 進階教學') }}</title>
     <!-- Styles-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">@yield('styles')
   </head>
