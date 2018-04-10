@@ -17,6 +17,9 @@
         @include('layouts._message')
         @yield('content')
       </div>@include('layouts._footer')
+      @if(app()->isLocal())
+      @include('sudosu::user-selector')
+      @endif
     </div>
     <!-- Scripts-->
     <script src="{{ asset('js/app.js') }}"></script>@yield('scripts')
