@@ -38,7 +38,9 @@ return array(
      */
     'menu' => [
         '用戶與權限' => [
-            'users' // 对应需要创建的文件：`config/administrator/posts.php`
+          'users',  // 对应需要创建的文件：`config/administrator/posts.php`
+          'roles',
+          'permissions',
         ],
     ],
 
