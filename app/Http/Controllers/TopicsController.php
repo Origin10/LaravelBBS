@@ -22,7 +22,7 @@ class TopicsController extends Controller
     {
         $topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
-        dd($active_users);
+        // dd($active_users);
         return view('topics.index', compact('topics', 'active_users'));
     }
 
@@ -75,7 +75,7 @@ class TopicsController extends Controller
     {
         $data = [
             'success' => false,
-            'msg' => '上传失败',
+            'msg' => '上傳失敗',
             'file_path' => '',
         ];
 
@@ -84,7 +84,7 @@ class TopicsController extends Controller
             if ($result) {
                 $data = [
                     'success' => true,
-                    'msg' => '上传成功',
+                    'msg' => '上傳成功',
                     'file_path' => $result['path'],
                 ];
             }
