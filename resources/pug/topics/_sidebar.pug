@@ -18,3 +18,15 @@
         span.media-heading {{ $active_user->name }}
     | @endforeach
 | @endif
+
+| @if (count($links))
+.panel.panel-default
+  .panel-body.active-users
+    .text-center 資源推薦
+    hr
+    | @foreach ($links as $link)
+    a.media(href!='{{ $link->link }}')
+      .media-body
+        span.media-heading {{ $link->title }}
+    | @endforeach
+| @endif
